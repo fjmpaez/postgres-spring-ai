@@ -7,5 +7,5 @@ import java.util.List;
 public interface FurnitureRepository {
     void save(Furniture furniture);
     long count();
-    List<Furniture> findBySimilarity(String content, Double topPrice);
+    List<Furniture> findBySimilarity(String content, Double topPrice, int maxResults);
 }

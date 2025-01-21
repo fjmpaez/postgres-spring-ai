@@ -41,9 +41,9 @@ public class JpaSpringAIFurnitureRepository implements FurnitureRepository {
     }
 
     @Override
-    public List<Furniture> findBySimilarity(String content, Double topPrice) {
+    public List<Furniture> findBySimilarity(String content, Double topPrice, int maxResults) {
 
-        final SearchRequest searchRequest = SearchRequest.query(content);
+        final SearchRequest searchRequest = SearchRequest.query(content).withTopK(maxResults);
 
         if(topPrice > 0.0) {
             searchRequest.withFilterExpression("price <= " + topPrice);
