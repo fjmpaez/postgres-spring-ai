@@ -1,0 +1,21 @@
+services:
+  postgres-pgvector:
+    build:
+      context: ./postgres-pgvector
+      dockerfile: Dockerfile
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./initdb/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  postgres_data:
+    driver: local
+
+
