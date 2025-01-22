@@ -1,4 +1,4 @@
-package com.adictosaltrabajo.ai.data;
+package com.adictosaltrabajo.ai.adapter;
 
 import com.adictosaltrabajo.ai.model.Furniture;
 import org.springframework.stereotype.Repository;

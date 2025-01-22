@@ -1,6 +1,7 @@
 package com.adictosaltrabajo.ai;
 
 import com.adictosaltrabajo.ai.model.FurnitureCatalog;
+import com.adictosaltrabajo.ai.model.FurnitureRepository;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.model.ChatModel;
@@ -8,7 +9,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.Scanner;
 
 @Component

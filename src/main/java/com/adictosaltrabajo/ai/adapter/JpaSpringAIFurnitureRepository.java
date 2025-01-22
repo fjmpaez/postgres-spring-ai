@@ -1,11 +1,12 @@
-package com.adictosaltrabajo.ai.data;
+package com.adictosaltrabajo.ai.adapter;
 
-import com.adictosaltrabajo.ai.FurnitureRepository;
+import com.adictosaltrabajo.ai.model.FurnitureRepository;
 import com.adictosaltrabajo.ai.model.Furniture;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;

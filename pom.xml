@@ -32,7 +32,7 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- Ollama starter (for accessing embedding model) -->
+        <!-- Ollama starter (for accessing LLM and embedding model) -->
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-ollama-spring-boot-starter</artifactId>
