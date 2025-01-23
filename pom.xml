@@ -13,10 +13,10 @@
     <artifactId>postgres-springai</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>postgres-springai</name>
-
     <properties>
         <java.version>23</java.version>
         <spring-ai.version>1.0.0-M4</spring-ai.version>
+        <hibernate-vector.version>6.4.0.Final</hibernate-vector.version>
     </properties>
 
     <dependencyManagement>
@@ -42,6 +42,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-vector -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-vector</artifactId>
+            <version>${hibernate-vector.version}</version>
         </dependency>
 
         <!-- For semantic search on postgres with pg_vector extension -->

@@ -2,6 +2,9 @@ package com.adictosaltrabajo.ai.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Array;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -11,7 +14,8 @@ import java.util.UUID;
 @NoArgsConstructor(force = true)
 @AllArgsConstructor
 @Getter
-@ToString
+@ToString(exclude = {"embedding"})
+@Builder(toBuilder = true)
 public class Furniture {
 
     @Id
@@ -26,6 +30,10 @@ public class Furniture {
     private final float height;
     private final float depth;
     private final BigDecimal price;
+
+    @JdbcTypeCode(SqlTypes.VECTOR)
+    @Array(length = 384)
+    private final float[] embedding;
 
     public String getContent() {
         return name + " " + description + " " + type + " " + style + " " + material + " " + color;

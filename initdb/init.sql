@@ -1,13 +1,5 @@
 CREATE EXTENSION IF NOT EXISTS vector;
 
-CREATE TABLE furniture_embedding
-(
-    id        uuid not null PRIMARY KEY,
-    embedding vector(384),
-    content      text,
-    metadata  json
-);
-
 CREATE TABLE furniture
 (
     id           uuid not null  PRIMARY KEY,
@@ -20,8 +12,8 @@ CREATE TABLE furniture
     color        varchar(255)   not null,
     height       numeric(19, 2) not null,
     width        numeric(19, 2) not null,
-    depth        numeric(19, 2) not null
+    depth        numeric(19, 2) not null,
+    embedding    vector(384)
 );
 
--- CREATE INDEX furniture_ivfflat_index ON furniture_embedding USING ivfflat (embedding vector_cosine_ops);
-CREATE INDEX ON furniture_embedding USING HNSW (embedding vector_cosine_ops);
+CREATE INDEX ON furniture USING HNSW (embedding vector_cosine_ops);

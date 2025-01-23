@@ -1,17 +1,18 @@
-package com.adictosaltrabajo.ai.adapter;
+package com.adictosaltrabajo.ai.adapter.database;
 
 import com.adictosaltrabajo.ai.model.FurnitureRepository;
 import com.adictosaltrabajo.ai.model.Furniture;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
 
 @Repository
+@Profile("vector-store")
 public class JpaSpringAIFurnitureRepository implements FurnitureRepository {
 
     private final JpaFurnitureDao jpaFurnitureDao;
@@ -46,7 +47,7 @@ public class JpaSpringAIFurnitureRepository implements FurnitureRepository {
 
         final SearchRequest searchRequest = SearchRequest.query(content).withTopK(maxResults);
 
-        if(topPrice > 0.0) {
+        if (topPrice > 0.0) {
             searchRequest.withFilterExpression("price <= " + topPrice);
         }
 
