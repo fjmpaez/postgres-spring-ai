@@ -1,7 +1,7 @@
 package com.adictosaltrabajo.ai.adapter.database;
 
-import com.adictosaltrabajo.ai.model.FurnitureRepository;
 import com.adictosaltrabajo.ai.model.Furniture;
+import com.adictosaltrabajo.ai.model.FurnitureRepository;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
@@ -26,12 +26,12 @@ public class JpaSpringAIFurnitureRepository implements FurnitureRepository {
     @Override
     public void save(Furniture furniture) {
         final Document document = Document.builder()
-                .withId(furniture.getId().toString())
-                .withContent(furniture.getContent())
-                .withMetadata("price", furniture.getPrice())
-                .withMetadata("width", furniture.getWidth())
-                .withMetadata("height", furniture.getHeight())
-                .withMetadata("depth", furniture.getDepth())
+                .id(furniture.getId().toString())
+                .text(furniture.getContent())
+                .metadata("price", furniture.getPrice())
+                .metadata("width", furniture.getWidth())
+                .metadata("height", furniture.getHeight())
+                .metadata("depth", furniture.getDepth())
                 .build();
         furnitureVectorStore.add(List.of(document));
         jpaFurnitureDao.save(furniture);
@@ -45,13 +45,13 @@ public class JpaSpringAIFurnitureRepository implements FurnitureRepository {
     @Override
     public List<Furniture> findBySimilarity(String content, Double topPrice, int maxResults) {
 
-        final SearchRequest searchRequest = SearchRequest.query(content).withTopK(maxResults);
+        var searchRequest = SearchRequest.builder().query(content).topK(maxResults);
 
         if (topPrice > 0.0) {
-            searchRequest.withFilterExpression("price <= " + topPrice);
+            searchRequest.filterExpression("price <= " + topPrice);
         }
 
-        List<UUID> uuids = furnitureVectorStore.similaritySearch(searchRequest).stream().map(document -> UUID.fromString(document.getId())).toList();
+        List<UUID> uuids = furnitureVectorStore.similaritySearch(searchRequest.build()).stream().map(document -> UUID.fromString(document.getId())).toList();
 
         return jpaFurnitureDao.findAllById(uuids);
     }

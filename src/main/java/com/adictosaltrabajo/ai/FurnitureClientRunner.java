@@ -63,7 +63,8 @@ public class FurnitureClientRunner implements ApplicationRunner {
             }
 
             System.out.println("Searching for furniture similar to: " + furnitureDescription);
-            furnitureRepository.findBySimilarity(furnitureDescription, topPriceBD, 5).forEach(System.out::println);
+            furnitureRepository.findBySimilarity(furnitureDescription, topPriceBD, 5).forEach(
+                    System.out::println);
             System.out.println("*************************************************");
 
         }
